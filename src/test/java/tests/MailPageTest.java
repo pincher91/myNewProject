@@ -1,21 +1,24 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static constants.Constant.Url.URL;
 
 public class MailPageTest extends BaseTest {
 
     @Test
-    public void SendingLetterToYourselfTest() {
-        basePage.open(URL);
-        mailPage
-                .authorization();
-        Assert.assertTrue(mailPage.iconOfAccount());
+    @Description("Authorization on the website")
+    public void authorizationTest() {
+        mailPage.authorization();
+        Assert.assertTrue( mailPage.iconOfAccountPresents());
+    }
 
-        inboxPage
-                .sendLetterToYourself();
+    @Test
+    @Description("Sending a letter to yourself")
+    public void sendLetterToYourselfTest() {
+        inboxPage.sendLetterToYourself();
+        inboxPage.takeScreenshot();
         Assert.assertTrue(inboxPage.letterToYourselfPresents());
+        inboxPage.takeScreenshot();
     }
 }

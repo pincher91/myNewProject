@@ -10,8 +10,8 @@
 
     <properties>
         <aspectj.version>1.9.8</aspectj.version>
-        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
-        <allure-testing.version>2.17.3</allure-testing.version>
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <allure-testng.version>2.17.3</allure-testng.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>${allure-testing.version}</version>
+            <version>${allure-testng.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -73,11 +73,11 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <allureDownloadUrl>https://github.com/allure-framework/allure/releases/download/2.7.0/allure-2.7.0.zip</allureDownloadUrl>
-                    <resultsDirectory>allure-results</resultsDirectory>
-                </configuration>
+                <version>2.11.2</version>
+                <!--                <configuration>-->
+                <!--                    <allureDownloadUrl>https://github.com/allure-framework/allure/releases/download/2.17.3/allure-2.17.3.zip</allureDownloadUrl>-->
+                <!--                    <resultsDirectory>allure-results</resultsDirectory>-->
+                <!--                </configuration>-->
             </plugin>
         </plugins>
     </build>

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,58 +21,70 @@ public class MailPage extends BasePage {
     @FindBy(xpath = "//iframe[@class='ag-popup__frame__layout__iframe']")
     private WebElement iframe;
     @FindBy(xpath = "//input[@name='username']")
-    private WebElement login;
+    private WebElement emailTxtBox;
     @FindBy(xpath = "//span[text()='Ввести пароль']")
     private WebElement enterPasswordButton;
     @FindBy(xpath = "//input[@name='password']")
     private WebElement password;
     @FindBy(xpath = ".//*[@data-test-id='submit-button']//span")
-    private WebElement signInFormButton;
+    private WebElement accountSignInButton;
     @FindBy(xpath = "//span[contains(@class,'ph-project__user-name') and text()='lesson_10@mail.ru']")
     private WebElement iconOfAccount;
 
-    public pages.MailPage clickSingIn() {
+
+    @Step("Clicking on Sign in button")
+    public MailPage clickSingIn() {
         sinInButton.click();
         return this;
     }
 
-    public pages.MailPage switchToIframe() {
+    @Step("Switching to the authorization form")
+    public MailPage switchToIframe() {
         waitFrameIsAvailableAndSwitchToIt(iframe);
         return this;
     }
 
-    public pages.MailPage fillInputLogin() {
-        login.sendKeys(USERNAME);
+    @Step("Entering the user name")
+    public MailPage enterUserName() {
+        emailTxtBox.sendKeys(USERNAME);
         return this;
     }
 
-    public pages.MailPage clickEnterPasswordButton() {
+    @Step("Clicking on Enter the password button")
+    public MailPage clickEnterPasswordButton() {
         enterPasswordButton.click();
         return this;
     }
 
-    public pages.MailPage fillInputPassword() {
+    @Step("Entering the password")
+    public MailPage enterPassword() {
         password.sendKeys(PASSWORD);
         return this;
     }
 
-    public InboxPage clickSignInFormButton() {
-        signInFormButton.click();
+    @Step("Clicking on the account sign in button")
+    public InboxPage clickAccountSignInButton() {
+        accountSignInButton.click();
         return new InboxPage(driver);
     }
 
+    @Step("Authorization on the website")
     public InboxPage authorization() {
         this.clickSingIn();
         this.switchToIframe();
-        this.fillInputLogin();
+        this.enterUserName();
         this.clickEnterPasswordButton();
-        this.fillInputPassword();
-        this.clickSignInFormButton();
+        this.enterPassword();
+        this.clickAccountSignInButton();
         driver.switchTo().defaultContent();
         return new InboxPage(driver);
     }
 
-    public boolean iconOfAccount() {
+    @Step("Checking the visibility of the account icon")
+    public boolean iconOfAccountPresents() {
+        if (iconOfAccount.isDisplayed()) iconOfAccount.getText();
+        String heading = iconOfAccount.getText();
+        System.out.println(heading);
         return iconOfAccount.isDisplayed();
     }
 }
